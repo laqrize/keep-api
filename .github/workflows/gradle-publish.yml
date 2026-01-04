@@ -28,14 +28,18 @@ jobs:
         id: check_version
         run: |
           CURRENT_VERSION=$(./gradlew -q properties | grep "^version:" | awk '{print $2}')
-
-          git checkout HEAD~1
-          PREVIOUS_VERSION=$(./gradlew -q properties | grep "^version:" | awk '{print $2}')
-          git checkout -
-
+          
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            git checkout HEAD~1
+            PREVIOUS_VERSION=$(./gradlew -q properties | grep "^version:" | awk '{print $2}')
+            git checkout -
+          else
+            PREVIOUS_VERSION=""
+          fi
+          
           echo "Current version: $CURRENT_VERSION"
           echo "Previous version: $PREVIOUS_VERSION"
-
+          
           if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
             echo "version_updated=true" >> $GITHUB_OUTPUT
           else
