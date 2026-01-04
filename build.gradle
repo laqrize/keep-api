@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'pl.ros'
-version = '1.0.6-SNAPSHOT'
+version = '1.0.7-SNAPSHOT'
 description = 'keep-api'
 
 java {
@@ -14,7 +14,7 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
     withSourcesJar()  // Publishes sources for IDE navigation
-    withJavadocJar()  // Publishes javadoc
+//    withJavadocJar()  // Publishes javadoc
 }
 
 configurations {
