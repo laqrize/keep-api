@@ -2,6 +2,7 @@ package pl.ros.keepapi.notes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import pl.ros.commons.dtos.AbstractCustomDto;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper=false)
 public class NoteDto extends AbstractCustomDto<String> {
     private String id;
     private String title;
@@ -31,6 +33,7 @@ public class NoteDto extends AbstractCustomDto<String> {
                 .toList();
     }
 
+    @SuppressWarnings("unchecked")
     public void setLabelIds(List<Long> labelIds) {
         if (labelIds == null) {
             this.labels = new ArrayList<>();
@@ -51,6 +54,7 @@ public class NoteDto extends AbstractCustomDto<String> {
                 .toList();
     }
 
+    @SuppressWarnings("unchecked")
     public void setImagesIds(List<String> imagesIds) {
         if (imagesIds == null) {
             this.images = new ArrayList<>();
