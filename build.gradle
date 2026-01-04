@@ -6,13 +6,15 @@ plugins {
 }
 
 group = 'pl.ros'
-version = '1.0.4-SNAPSHOT'
+version = '1.0.5-SNAPSHOT'
 description = 'keep-api'
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    withSourcesJar()  // Publishes sources for IDE navigation
+    withJavadocJar()  // Publishes javadoc
 }
 
 configurations {
@@ -52,6 +54,15 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+// This is a library, not an executable - disable Spring Boot's fat JAR
+tasks.named('bootJar') {
+    enabled = false
+}
+
+tasks.named('jar') {
+    enabled = true
+}
+
 publishing {
     repositories {
         maven {
@@ -66,6 +77,18 @@ publishing {
     publications {
         gpr(MavenPublication) {
             from components.java
+            
+            pom {
+                name = 'Keep API'
+                description = 'Shared DTOs and API contracts for Keep microservices'
+                url = 'https://github.com/laqrize/keep-api'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+            }
         }
     }
 }
