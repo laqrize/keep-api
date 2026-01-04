@@ -14,7 +14,7 @@ import java.util.List;
  * 1. Add @EnableFeignClients(basePackages = "pl.ros.keepapi") to your main class
  * 2. Inject LabelApi where needed
  */
-@FeignClient(name = "label-svc", path = "/labels")
+@FeignClient(name = "label-svc", path = "/api/labels")
 public interface LabelApi {
 
     @GetMapping
