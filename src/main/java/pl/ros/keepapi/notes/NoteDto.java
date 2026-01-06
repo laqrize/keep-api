@@ -22,7 +22,7 @@ public class NoteDto extends AbstractCustomDto<String> {
     private String title;
     private String content;
     private List<LabelDto> labels;
-    private List<FileDto> images;
+    private List<FileDto> media;
 
     public List<Long> getLabelIds() {
         if (labels == null) {
@@ -45,22 +45,22 @@ public class NoteDto extends AbstractCustomDto<String> {
     }
 
 
-    public List<String> getImagesIds() {
-        if (images == null) {
+    public List<String> getMediaIds() {
+        if (media == null) {
             return new ArrayList<>();
         }
-        return images.stream()
+        return media.stream()
                 .map(FileDto::getId)
                 .toList();
     }
 
     @SuppressWarnings("unchecked")
-    public void setImagesIds(List<String> imagesIds) {
+    public void setMediaIds(List<String> imagesIds) {
         if (imagesIds == null) {
-            this.images = new ArrayList<>();
+            this.media = new ArrayList<>();
             return;
         }
-        this.images = (List<FileDto>) imagesIds.stream()
+        this.media = (List<FileDto>) imagesIds.stream()
                 .map(id -> FileDto.builder().id(id).build())
                 .toList();
     }
